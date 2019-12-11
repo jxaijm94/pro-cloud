@@ -1,0 +1,81 @@
+server:
+  port: 80
+
+
+spring:
+  application:
+    name: @artifactId@
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:8769
+#    #profiles: dev
+#  cloud:
+#    sentinel:
+#      transport:
+#        port: 8719
+#        dashboard: localhost:8080
+
+  # 配置邮件
+  mail:
+    host: smtp.163.com
+    port:
+    protocol: smtp
+    username: jxaijm94@163.com
+    password: ai123456
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://119.23.8.73:3306/cloud_crm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    username: ENC(H15dJ+G7zVCtGXpZnoC8aw==)
+    password: ENC(Rl4qmW/H2ukPTr5pgYwLyQIpoGBC6tjO)
+aliyun:
+  oss:
+    accessKeyId: 122
+    accessKeySecret: 334
+    bucketName: 445
+    callback: 67
+    endpoint: 789
+    endpointInternal: 7899
+    maxSize: 67889
+    policyIexpire: 5677
+    filePaths:
+      - type: default
+        prePath: default
+        belongName: default
+        belongType: default
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.cloud.auth.entity
+  global-config:
+    # 数据库相关配置
+    banner: false
+    db-config:
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  performanceInterceptor:
+    enabled: true
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://localhost:8082/oauth/token
+      user-authorization-uri: http://localhost:8082/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:8082/oauth/check_token
+      loadBalanced: true

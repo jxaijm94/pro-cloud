@@ -1,0 +1,85 @@
+server:
+  port: 9100
+
+
+spring:
+  application:
+    name: @artifactId@
+  boot:
+    admin:
+      client:
+        url: http://localhost:9900
+    #profiles: dev
+#  cloud:
+#    sentinel:
+#      transport:
+#        port: 8719
+#        dashboard: localhost:8080
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://119.23.8.73:3306/cloud_crm?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: ENC(H15dJ+G7zVCtGXpZnoC8aw==)
+    password: ENC(Rl4qmW/H2ukPTr5pgYwLyQIpoGBC6tjO)
+
+
+  main:
+    allow-bean-definition-overriding: true
+    # 整合redis
+  redis:
+    host: 119.23.8.73
+    password:
+    port: 8379
+    timeout: 10000 # 连接超时时间（毫秒）
+    database: 0 # Redis默认情况下有16个分片，这里配置具体使用的分片，默认是0
+
+#security:
+#  basic:
+#    enabled: false
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.cloud.admin.beans
+  global-config:
+    # 数据库相关配置
+    banner: false
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: id_worker
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+  performanceInterceptor:
+    enabled: true
+security:
+  oauth2:
+    client:
+#      client-id: client
+#      client-secret: secret
+      access-token-uri: http://cloud-auth/oauth/token
+      user-authorization-uri: http://cloud-auth/oauth/authorize
+      ignore-urls:
+        - /actuator/**
+        - /actuator
+    resource:
+      token-info-uri: http://cloud-auth/oauth/check_token
+      loadBalanced: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

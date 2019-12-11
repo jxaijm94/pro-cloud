@@ -1,0 +1,116 @@
+spring:
+  application:
+    name: cloud-auth
+  profiles:
+    active: dev
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: false
+
+#  main:
+#    allow-bean-definition-overriding: true
+  freemarker:
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+    tempalte-loader-path: classpath:/templates
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://119.23.8.73:3306/cloud_crm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    username: ENC(H15dJ+G7zVCtGXpZnoC8aw==)
+    password: ENC(Rl4qmW/H2ukPTr5pgYwLyQIpoGBC6tjO)
+
+  resources:
+    static-locations: classpath:/static/
+feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+
+  ##请求处理的超时时间
+  #ribbon:
+  #  ReadTimeout: 120000
+  ##请求连接的超时时间
+  #  ConnectTimeout: 30000
+
+  #hystrix:
+  #  command:
+  #    default:  #default全局有效，service id指定应用有效
+  #      execution:
+  #        timeout:
+  #          #是否开启超时熔断
+  #          enabled: true
+  #        isolation:
+  #          thread:
+  #            timeoutInMilliseconds: 4000 #断路器超时时间，默认1000ms
+
+  #
+  sentinel:
+    enabled: true
+
+#
+#feign:
+#  hystrix:
+#    enabled: true
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+          #这里将线程策略设置为SEMAPHORE
+          strategy: SEMAPHORE
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.cloud.auth.entity
+  global-config:
+    # 数据库相关配置
+    banner: false
+    db-config:
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  performanceInterceptor:
+    enabled: true
+
+
+
+pro-cloud:
+  security:
+    client:
+      clientId: client
+      clientSecret: secret
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

@@ -1,0 +1,22 @@
+server:
+  port: 4040
+  servlet:
+    context-path: /
+
+security:
+  oauth2:
+    client:
+      client-id: client_1
+      client-secret: 123456
+      user-authorization-uri: http://localhost:8082/oauth/authorize
+      access-token-uri: http://localhost:8082/oauth/token
+      scope: server
+    resource:
+      loadBalanced: true
+      token-info-uri: http://localhost:8082/oauth/check_token
+
+spring:
+  application:
+    name: @artifactId@
+  resources:
+    static-locations: classpath:/static/
