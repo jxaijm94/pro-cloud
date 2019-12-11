@@ -40,12 +40,12 @@ Pro-Cloud
 │  ├─cloud-common-util   -- 基础工具类
 │  ├─cloud-common-websocket  -- websocket工具类
 │  └─cloud-common-zk   -- zk分布式锁工具类
-├─cloud-email      -- 发送邮件模块
-│  ├─cloud-email-api
-│  ├─cloud-email-common
-│  └─cloud-email-service
 ├─cloud-gateway   -- springcloud gateway 网关 
 ├─cloud-generator   -- 代码生成
+├─cloud-message      -- 发送邮件短信模块
+│  ├─cloud-message-api
+│  ├─cloud-message-common
+│  └─cloud-message-service
 ├─cloud-monitor  -- 监控模块
 ├─cloud-oss  -- oss文件上传模块
 │  ├─cloud-oss-api
