@@ -52,10 +52,6 @@ Pro-Cloud
 │  ├─cloud-oss-common
 │  └─cloud-oss-service
 ├─cloud-search  -- es收搜模块
-├─cloud-sms   -- 短信模块
-│  ├─cloud-sms-api
-│  ├─cloud-sms-common
-│  └─cloud-sms-service
 ├─cloud-sso-demo   -- 单点登录案例
 ├─cloud-transaction   -- 分布式事务
 ├─cloud-websocket   -- websocket案例
